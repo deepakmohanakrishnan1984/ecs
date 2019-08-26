@@ -1,0 +1,55 @@
+---
+- name: entity
+  title: Entity
+  group: 2
+  short: Fields describing the relevant domain entities.
+  description: >
+    A host is defined as a general computing instance.
+    An instance of domain model with a state is defined as entity in general.
+
+    ECS entity.* fields should be populated with non-PII details about the entity on which
+    the event happened. Entity may include a user, account, or customer.
+    Normally `entitiy` field should co-occur with `event` fieldset. For e.g.:
+    {
+      "event"     : {
+        "action"  : {
+          "name"  : "create"
+        }
+      },
+      "entity"  : {
+        "id"    : "1000",
+        "name"  : "elastic-user"
+        "type"  : "user"
+      }
+    }
+  type: group
+  fields:
+
+    - name: id
+      level: extended
+      type: keyword
+      short: Unique identity of an entity if one exists.
+      description: >
+        Unique identity of an entity.
+
+        It normally contains an unique identofier to represent an entity from an external system,
+        like a database or other service.
+
+    - name: name
+      level: extended
+        type: keyword
+        short: Name of an entity
+        description: >
+          Name of an entity.
+
+          Its a normalized string value of the name of the entity.
+
+    - name: type
+      level: extended
+        type: keyword
+        short: Type of an entity
+        description: >
+          Type of an entity.
+
+          Its a normalized string value to represent the actual type of the entity.
+          For e.g.: {"entity": {"type" : "user" } }
